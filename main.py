@@ -114,6 +114,33 @@ def getDate(text):
                     except:
                         pass
 
+    # THE NEW PART STARTS HERE
+    # if the month mentioned is before the current month set the year to the next
+    if month < today.month and month != -1:
+        year = year+1
+
+    if month == -1 and day != -1:  # if we didn't find a month, but we have a day
+        if day < today.day:
+            month = today.month + 1
+        else:
+            month = today.month
+
+    if month == -1 and day == -1 and day_of_week != -1:
+        current_day_of_week = today.weekday()
+        dif = day_of_week - current_day_of_week
+
+        if dif < 0:
+            dif += 7
+            if text.count("next") >= 1:
+                dif += 7
+
+        return today + datetime.timedelta(dif)
+
+    if day != -1:
+        return datetime.date(month=month, day=day, year=year)
+
 
 service = authenticateGoogle()
 getEvents(2, service)
+text = getAudio()
+print(getDate(text))
