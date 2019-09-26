@@ -43,7 +43,7 @@ speak("I'm Gabbar.Py")
 getAudio()
 
 
-def main():
+def authenticateGoogle():
 
     creds = None
 
@@ -62,12 +62,15 @@ def main():
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
+    return service
 
+
+def getEvents(n, service):
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    print(f'Getting the upcoming {n} events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
-                                          maxResults=10, singleEvents=True,
+                                          maxResults=n, singleEvents=True,
                                           orderBy='startTime').execute()
     events = events_result.get('items', [])
 
@@ -78,5 +81,5 @@ def main():
         print(start, event['summary'])
 
 
-if __name__ == '__main__':
-    main()
+service = authenticateGoogle()
+getEvents(2, service)
