@@ -36,3 +36,6 @@ text = getAudio()
 
 if "hello" in text:
     speak("Hello, how're your?")
+
+if "what is your name" in text:
+    speak("My name is Gabbar.Py!")
