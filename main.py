@@ -14,4 +14,11 @@ def speak(text):
     playsound.playsound(filename)
 
 
+def getAudio():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        audio = r.listen(source)
+        said = ""
+
+
 speak("I'm Gabbar.Py")
