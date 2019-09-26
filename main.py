@@ -30,3 +30,4 @@ def getAudio():
 
 
 speak("I'm Gabbar.Py")
+getAudio()
