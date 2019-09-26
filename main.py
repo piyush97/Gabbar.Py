@@ -31,3 +31,8 @@ def getAudio():
 
 speak("I'm Gabbar.Py")
 getAudio()
+
+text = getAudio()
+
+if "hello" in text:
+    speak("Hello, how're your?")
